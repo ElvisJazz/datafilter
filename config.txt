@@ -1,0 +1,17 @@
+// 确定搜索范围 ["BB", 1(1:顺序搜索, 2:包围搜索), -1(在范围内搜索所有孩子节点的遍历次数, -1表示搜索直到失败),
+//              -1(子节点在一次遍历搜索成功指定次数后,本搜索节点结束搜索), "<div class=\"name\">"(起始tag1), 0(起始tag1偏移), "more ctag"(起始tag2), 0(起始tag2偏移),
+// 定位搜索目标 ["TB", "BigClsName"(搜索到的目标键名), false(失败则停止父节点的搜索), true(是否先搜索tag2,再反向搜索tag1),
+//              ">"(起始tag1), 1(起始tag1偏移), "</a>"(起始tag2), 0(起始tag2偏移)]
+
+["BB", 1, -1, -1, "<div class=\"name\">", 0, "more ctag", 0, // 寻找每个大分类和对应小分类的搜索范围
+	["BB", 1, 1, 1, "<div class=\"name\">", 0, "</div>", 6, // 大分类定界搜索
+		["TB", "BigClsName", false, true, ">", 1, "</a>", 0],
+		["TB", "BigClsName", false, false, "</i>", 4, "</div>", 0]
+	],
+	["BB", 1, -1, -1, "brands all ctag", 0, "morewrap", 0, // 小分类定界搜索
+		["BB", 1, -1, -1, "<a title", 0, "</a>", 0,
+			["TB", "link", true, false, "href=\"", 6, "\"", 0],
+			["TB", "title", true, false, "title=\"", 7, "\"", 0]
+		]
+	]
+]
